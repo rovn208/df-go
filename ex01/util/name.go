@@ -4,13 +4,15 @@ import (
 	"strings"
 )
 
-func ReOrderName(order NameOrder, args []string) string {
+// ReOrderName returns a full name which has order based on the country Code
+func ReOrderName(countryCode string, args []string) string {
+	nameOrder := GetNameOrder(countryCode)
 	firstName, middleName, lastName := getNameParts(args)
 
 	if middleName == "" {
-		return getName(order, firstName, lastName)
+		return getName(nameOrder, firstName, lastName)
 	}
-	return getName(order, firstName, middleName, lastName)
+	return getName(nameOrder, firstName, middleName, lastName)
 }
 
 func getName(order NameOrder, nameParts ...string) string {

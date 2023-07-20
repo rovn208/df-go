@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// GetCountryCode returns a country is its supported, otherwise return empty
 func GetCountryCode(args []string) (string, bool) {
 	country := args[len(args)-1]
 	if !isValidCountry(country) {
@@ -27,10 +28,13 @@ func isValidCountry(countryCode string) bool {
 type NameOrder string
 
 const (
+	// WESTERN aka Western name order has the order given name(s), family name
 	WESTERN NameOrder = "western"
+	// EASTERN aka Western name order has the order family name, given name(s)
 	EASTERN NameOrder = "eastern"
 )
 
+// GetNameOrder returns NameOrder based on country code. Using EASTERN as default value.
 func GetNameOrder(countryCode string) NameOrder {
 	switch countryCode {
 	case "US":

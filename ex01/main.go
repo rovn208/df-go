@@ -18,5 +18,5 @@ func main() {
 		log.Fatal("Error when getting countryCode")
 	}
 
-	fmt.Println(util.ReOrderName(util.GetNameOrder(countryCode), args))
+	fmt.Println(util.ReOrderName(countryCode, args))
 }
