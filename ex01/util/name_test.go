@@ -8,6 +8,7 @@ func TestReOrderName(t *testing.T) {
 		expectedName string
 	}{
 		{[]string{"Ro", "Ngoc", "Vo", "VN"}, "Vo Ngoc Ro"},
+		{[]string{"Ro", "Ngoc", "Dang", "Cong", "Vo", "VN"}, "Vo Ngoc Dang Cong Ro"},
 		{[]string{"Ro", "Vo", "VN"}, "Vo Ro"},
 		{[]string{"Ro", "Ngoc", "Vo", "US"}, "Ro Ngoc Vo"},
 		{[]string{"Ro", "Vo", "US"}, "Ro Vo"},
