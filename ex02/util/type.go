@@ -12,9 +12,8 @@ const (
 )
 
 // GetInputType returns the input type
-func GetInputType(cmd *cobra.Command) InputType {
-	// Assume InputType has been validated at Args phase (one required type)
-	for _, t := range []InputType{INTEGER, FLOAT, STRING, MIX} {
+func GetInputType(cmd *cobra.Command, inputTypes []InputType) InputType {
+	for _, t := range inputTypes {
 		if cmd.Flags().Changed(string(t)) {
 			return t
 		}

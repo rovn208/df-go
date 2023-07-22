@@ -47,7 +47,7 @@ func ExpectedArguments(cmd *cobra.Command, args []string) error {
 func run(cmd *cobra.Command, args []string) error {
 	var sortedString string
 	var err error
-	inputType := util.GetInputType(cmd)
+	inputType := util.GetInputType(cmd, []util.InputType{util.INTEGER, util.FLOAT, util.STRING, util.MIX})
 
 	switch inputType {
 	case util.INTEGER:
