@@ -18,7 +18,7 @@ func ValidateOneRequired(cmd cobra.Command, flagNames ...string) error {
 		}
 	}
 	if count == 0 {
-		return errors.New("at least one of flags is set")
+		return InputTypeMissingError
 	}
 	return nil
 

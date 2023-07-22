@@ -11,25 +11,23 @@ var (
 	floatType  bool
 	stringType bool
 	mixType    bool
+)
 
-	rootCmd = &cobra.Command{
+func New() *cobra.Command {
+	rootCmd := &cobra.Command{
 		Use:   "shorter",
 		Short: "Sort elements CLI application",
 		Long:  "Sort elements CLI application based on provided input type.",
 		Args:  expectedArguments,
 		RunE:  run,
 	}
-)
 
-func init() {
 	rootCmd.Flags().BoolVarP(&intType, string(util.INTEGER), "i", false, "Type of input array is integer")
 	rootCmd.Flags().BoolVarP(&floatType, string(util.FLOAT), "f", false, "Type of input array is float")
 	rootCmd.Flags().BoolVarP(&stringType, string(util.STRING), "s", false, "Type of input array is string")
 	rootCmd.Flags().BoolVarP(&mixType, string(util.MIX), "m", false, "Type of input array is a mix of primitive types")
 	rootCmd.MarkFlagsMutuallyExclusive(string(util.INTEGER), string(util.FLOAT), string(util.STRING), string(util.MIX))
-}
 
-func New() *cobra.Command {
 	return rootCmd
 }
 
@@ -60,7 +58,7 @@ func run(cmd *cobra.Command, args []string) error {
 			return err
 		}
 	}
-	fmt.Println(sortedString)
+	fmt.Fprintf(cmd.OutOrStdout(), sortedString)
 	return nil
 }
 
@@ -68,7 +66,7 @@ func expectedArguments(cmd *cobra.Command, args []string) error {
 	if err := cobra.MinimumNArgs(1)(cmd, args); err != nil {
 		return err
 	}
-	if err := util.ValidateOneRequired(*cmd, "int", "string", "mix"); err != nil {
+	if err := util.ValidateOneRequired(*cmd, string(util.INTEGER), string(util.FLOAT), string(util.STRING), string(util.MIX)); err != nil {
 		return err
 	}
 	return nil

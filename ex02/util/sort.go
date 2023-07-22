@@ -33,8 +33,9 @@ func SortFloatArr(args []string) (string, error) {
 
 func SortStringArr(args []string) (string, error) {
 	var err error
+	float64Arr := make([]float64, len(args))
 	for i := 0; i < len(args); i++ {
-		if _, err = strconv.Atoi(args[i]); err == nil {
+		if float64Arr[i], err = strconv.ParseFloat(args[i], 64); err == nil {
 			return "", errors.New(fmt.Sprintf("invalid argument: %s", args[i]))
 		}
 	}
@@ -62,7 +63,7 @@ func getSortedFloatArrToString(args []float64) (string, error) {
 
 	rs := ""
 	for _, str := range args {
-		rs += fmt.Sprintf("%f ", str)
+		rs += fmt.Sprintf("%v ", str)
 	}
 
 	return rs, nil
