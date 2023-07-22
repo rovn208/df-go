@@ -13,12 +13,13 @@ var (
 	mixType    bool
 )
 
+// New returns a new root command which has the main functionality of the CLI.
 func New() *cobra.Command {
 	rootCmd := &cobra.Command{
-		Use:   "shorter",
+		Use:   "sorter",
 		Short: "Sort elements CLI application",
 		Long:  "Sort elements CLI application based on provided input type.",
-		Args:  expectedArguments,
+		Args:  ExpectedArguments,
 		RunE:  run,
 	}
 
@@ -29,6 +30,18 @@ func New() *cobra.Command {
 	rootCmd.MarkFlagsMutuallyExclusive(string(util.INTEGER), string(util.FLOAT), string(util.STRING), string(util.MIX))
 
 	return rootCmd
+}
+
+// ExpectedArguments validates arguments before CLI is executed
+func ExpectedArguments(cmd *cobra.Command, args []string) error {
+	if err := cobra.MinimumNArgs(1)(cmd, args); err != nil {
+		return err
+	}
+	// If we need MIX type is using as default input Type, remove this validation
+	if err := util.ValidateOneRequired(*cmd, string(util.INTEGER), string(util.FLOAT), string(util.STRING), string(util.MIX)); err != nil {
+		return err
+	}
+	return nil
 }
 
 func run(cmd *cobra.Command, args []string) error {
@@ -59,15 +72,5 @@ func run(cmd *cobra.Command, args []string) error {
 		}
 	}
 	fmt.Fprintf(cmd.OutOrStdout(), sortedString)
-	return nil
-}
-
-func expectedArguments(cmd *cobra.Command, args []string) error {
-	if err := cobra.MinimumNArgs(1)(cmd, args); err != nil {
-		return err
-	}
-	if err := util.ValidateOneRequired(*cmd, string(util.INTEGER), string(util.FLOAT), string(util.STRING), string(util.MIX)); err != nil {
-		return err
-	}
 	return nil
 }

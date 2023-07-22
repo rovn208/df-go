@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// ValidateOneRequired validates one required flag
 func ValidateOneRequired(cmd cobra.Command, flagNames ...string) error {
 	count := 0
 	for _, name := range flagNames {

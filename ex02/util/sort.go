@@ -7,6 +7,8 @@ import (
 	"strconv"
 )
 
+// SortIntArr sorts an array of ints and return the sorted array in a string.
+// Returns an error if any element in the array is not an int.
 func SortIntArr(args []string) (string, error) {
 	var err error
 	intArr := make([]int, len(args))
@@ -19,6 +21,8 @@ func SortIntArr(args []string) (string, error) {
 	return getSortedIntArrToString(intArr)
 }
 
+// SortFloatArr sorts an array of floats and return the sorted array in a string.
+// Returns an error if any element in the array is not a float.
 func SortFloatArr(args []string) (string, error) {
 	var err error
 	float64Arr := make([]float64, len(args))
@@ -31,6 +35,8 @@ func SortFloatArr(args []string) (string, error) {
 	return getSortedFloatArrToString(float64Arr)
 }
 
+// SortStringArr sorts an array of strings and return the sorted array in a string.
+// Returns an error if any element in the array is not a string.
 func SortStringArr(args []string) (string, error) {
 	var err error
 	float64Arr := make([]float64, len(args))
@@ -43,6 +49,7 @@ func SortStringArr(args []string) (string, error) {
 	return getSortedStringArrToString(args)
 }
 
+// SortMix sorts an array of elements of mixed types and return the sorted array in a string.
 func SortMix(args []string) (string, error) {
 	return getSortedStringArrToString(args)
 }
