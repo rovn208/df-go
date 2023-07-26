@@ -13,13 +13,6 @@ var (
 	mixType    bool
 )
 
-//rootCmd := &cobra.Command{
-//Use:   "sorter",
-//Short: "Sort elements CLI application",
-//Long:  "Sort elements CLI application based on provided input type.",
-//Args:  ValidateArugments,
-//RunE:  run,
-
 // Execute returns the sorted string based on input type
 func Execute() (string, error) {
 	flag.Parse()
@@ -84,10 +77,3 @@ func getSortedString(args []string) (string, error) {
 	}
 	return sortedString, nil
 }
-
-//func run(cmd *cobra.Command, args []string) error {
-//	var sortedString string
-//	var err error
-//	inputType := util.GetInputType(cmd, []util.InputType{util.INTEGER, util.FLOAT, util.STRING, util.MIX})
-//
-//}
