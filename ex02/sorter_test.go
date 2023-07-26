@@ -29,7 +29,7 @@ func TestMainExecutor(t *testing.T) {
 		{"wrong type of string", toArray("-string 2 a"), "", errors.New("invalid argument: 2")},
 		{"input type is missing", toArray("apple"), "", util.InputTypeMissingError},
 		{"more than one input types", toArray("-mix -int apple 1 orange 4 banana 4.2"), "1 4 4.2 apple banana orange ",
-			errors.New("more than one input type is set")},
+			util.MoreThanOneInputTypeError},
 	}
 
 	for _, tc := range testCases {
