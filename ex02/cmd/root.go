@@ -1,9 +1,9 @@
 package cmd
 
 import (
-	"fmt"
+	"errors"
+	"flag"
 	"github.com/rovn208/df-go/ex02/util"
-	"github.com/spf13/cobra"
 )
 
 var (
@@ -13,64 +13,81 @@ var (
 	mixType    bool
 )
 
-// New returns a new root command which has the main functionality of the CLI.
-func New() *cobra.Command {
-	rootCmd := &cobra.Command{
-		Use:   "sorter",
-		Short: "Sort elements CLI application",
-		Long:  "Sort elements CLI application based on provided input type.",
-		Args:  ExpectedArguments,
-		RunE:  run,
+//rootCmd := &cobra.Command{
+//Use:   "sorter",
+//Short: "Sort elements CLI application",
+//Long:  "Sort elements CLI application based on provided input type.",
+//Args:  ValidateArugments,
+//RunE:  run,
+
+// Execute returns the sorted string based on input type
+func Execute() (string, error) {
+	flag.Parse()
+	args := flag.Args()
+
+	if err := ValidateArguments(args); err != nil {
+		return "", err
 	}
 
-	rootCmd.Flags().BoolVarP(&intType, string(util.INTEGER), "i", false, "Type of input array is integer")
-	rootCmd.Flags().BoolVarP(&floatType, string(util.FLOAT), "f", false, "Type of input array is float")
-	rootCmd.Flags().BoolVarP(&stringType, string(util.STRING), "s", false, "Type of input array is string")
-	rootCmd.Flags().BoolVarP(&mixType, string(util.MIX), "m", false, "Type of input array is a mix of primitive types")
-	rootCmd.MarkFlagsMutuallyExclusive(string(util.INTEGER), string(util.FLOAT), string(util.STRING), string(util.MIX))
-
-	return rootCmd
+	sortedString, err := getSortedString(args)
+	if err != nil {
+		return "", err
+	}
+	return sortedString, nil
 }
 
-// ExpectedArguments validates arguments before CLI is executed
-func ExpectedArguments(cmd *cobra.Command, args []string) error {
-	if err := cobra.MinimumNArgs(1)(cmd, args); err != nil {
+func init() {
+	flag.BoolVar(&intType, string(util.INTEGER), false, "Type of input array is integer")
+	flag.BoolVar(&floatType, string(util.FLOAT), false, "Type of input array is float")
+	flag.BoolVar(&stringType, string(util.STRING), false, "Type of input array is string")
+	flag.BoolVar(&mixType, string(util.MIX), false, "Type of input array is a mix of primitive types")
+}
+
+// ValidateArguments validates arguments before CLI is executed
+func ValidateArguments(args []string) error {
+	if len(args) < 1 {
+		return errors.New("requires at least 1 arg(s), only received 0")
+	}
+
+	if err := util.ValidateOneRequired(); err != nil {
 		return err
 	}
-	// If we need MIX type is using as default input Type, remove this validation
-	if err := util.ValidateOneRequired(*cmd, string(util.INTEGER), string(util.FLOAT), string(util.STRING), string(util.MIX)); err != nil {
-		return err
-	}
+
 	return nil
 }
 
-func run(cmd *cobra.Command, args []string) error {
+func getSortedString(args []string) (string, error) {
 	var sortedString string
 	var err error
-	inputType := util.GetInputType(cmd, []util.InputType{util.INTEGER, util.FLOAT, util.STRING, util.MIX})
-
+	inputType := util.GetInputType()
 	switch inputType {
 	case util.INTEGER:
 		sortedString, err = util.SortIntArr(args)
 		if err != nil {
-			return err
+			return "", err
 		}
 	case util.FLOAT:
 		sortedString, err = util.SortFloatArr(args)
 		if err != nil {
-			return err
+			return "", err
 		}
 	case util.STRING:
 		sortedString, err = util.SortStringArr(args)
 		if err != nil {
-			return err
+			return "", err
 		}
 	case util.MIX:
 		sortedString, err = util.SortMix(args)
 		if err != nil {
-			return err
+			return "", err
 		}
 	}
-	fmt.Fprintf(cmd.OutOrStdout(), sortedString)
-	return nil
+	return sortedString, nil
 }
+
+//func run(cmd *cobra.Command, args []string) error {
+//	var sortedString string
+//	var err error
+//	inputType := util.GetInputType(cmd, []util.InputType{util.INTEGER, util.FLOAT, util.STRING, util.MIX})
+//
+//}
