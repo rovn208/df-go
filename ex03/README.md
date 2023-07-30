@@ -19,7 +19,7 @@ func main() {
         {0, 0, 0, 0, 0, 0, 1},
     }
     
-    count := countRectangles(arr)
-    fmt.Printf("%v", count) // 6
+    rectangleCounter := counter.NewCounter(arr)
+    fmt.Printf("%v", rectangleCounter.CountRectangles()) // 6
 }
 ```
