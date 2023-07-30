@@ -1,4 +1,4 @@
-package main
+package counter
 
 import "fmt"
 
@@ -18,4 +18,8 @@ func NewPoint(row, col int) *Point {
 		Col: col,
 		Id:  fmt.Sprintf("%d%d", row, col),
 	}
+}
+
+func IsInRectangle(point *Point, topLeft *Point, topRight *Point) bool {
+	return point.Row >= topLeft.Row && point.Col >= topLeft.Col && point.Col <= topRight.Col
 }
