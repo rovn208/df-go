@@ -10,10 +10,12 @@ type RectangleCounter struct {
 	Matrix [][]int
 }
 
+// NewCounter creates a new counter
 func NewCounter(matrix [][]int) *RectangleCounter {
 	return &RectangleCounter{Matrix: matrix}
 }
 
+// CountRectangles returns the number of rectangles filled with 1s
 func (c *RectangleCounter) CountRectangles() int {
 	if len(c.Matrix) == 0 {
 		return 0
@@ -36,6 +38,7 @@ func (c *RectangleCounter) CountRectangles() int {
 	return len(rectangles)
 }
 
+// GetRectangle returns the rectangle filled with 1s starting from point p
 func GetRectangle(matrix [][]int, p *Point, visited map[string]*Point) []*Point {
 	valid := true
 	points := make([]*Point, 0)
@@ -72,6 +75,7 @@ func GetRectangle(matrix [][]int, p *Point, visited map[string]*Point) []*Point 
 
 }
 
+// GetTopRight returns the top-right point from point p
 func GetTopRight(matrix [][]int, p *Point) *Point {
 	topRight := NewPoint(p.Row, p.Col+1)
 	for IsValidPoint(matrix, topRight) {
@@ -80,6 +84,7 @@ func GetTopRight(matrix [][]int, p *Point) *Point {
 	return NewPoint(p.Row, topRight.Col-1)
 }
 
+// GetNeighbors returns the neighbors of point p
 func GetNeighbors(matrix [][]int, point *Point) []*Point {
 	rs := make([]*Point, 0)
 	indices := []*Point{NewPoint(point.Row-1, point.Col), NewPoint(point.Row+1, point.Col), NewPoint(point.Row, point.Col-1), NewPoint(point.Row, point.Col+1)}
@@ -91,7 +96,8 @@ func GetNeighbors(matrix [][]int, point *Point) []*Point {
 	return rs
 }
 
-func IsValidPoint(arr [][]int, point *Point) bool {
+// IsValidPoint returns true if point is valid in the current matrix
+func IsValidPoint(matrix [][]int, point *Point) bool {
 	row, col := point.Row, point.Col
-	return row >= 0 && row < len(arr) && col >= 0 && col < len(arr[0]) && arr[row][col] == 1
+	return row >= 0 && row < len(matrix) && col >= 0 && col < len(matrix[0]) && matrix[row][col] == 1
 }
