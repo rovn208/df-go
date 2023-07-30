@@ -19,8 +19,7 @@ E.g: “a123bc34d8ef34” => 3 (123, 34, 8)
 ```console
 func main() {
     word := "a123bc34d8ef34"
-    counter := counter2.NewCounter(word)
-
-    fmt.Println(counter.GetDifferentIntegers())
+    simpleCounter := counter.NewCounter(word)
+    fmt.Println(simpleCounter.GetDifferentIntegers())
 }
 ```
