@@ -1,6 +1,8 @@
 package counter
 
-import "container/list"
+import (
+	"container/list"
+)
 
 type Counter interface {
 	CountRectangles() int
@@ -49,6 +51,7 @@ func GetRectangle(matrix [][]int, p *Point, visited map[string]*Point) []*Point 
 
 	// Get top-right node
 	topRight := GetTopRight(matrix, p)
+	bottomLeft := p
 
 	// BFS
 	for queue.Len() > 0 {
@@ -59,6 +62,10 @@ func GetRectangle(matrix [][]int, p *Point, visited map[string]*Point) []*Point 
 				queue.PushBack(point)
 				points = append(points, point)
 
+				if point.Col == bottomLeft.Col && point.Row >= bottomLeft.Row {
+					bottomLeft = point
+				}
+
 				if !IsInRectangle(point, p, topRight) {
 					valid = false
 				}
@@ -68,11 +75,11 @@ func GetRectangle(matrix [][]int, p *Point, visited map[string]*Point) []*Point 
 	}
 
 	rectangleWidth := topRight.Col - p.Col + 1
-	if valid && len(points)%rectangleWidth == 0 {
+	rectangleHeight := bottomLeft.Row - p.Row + 1
+	if valid && len(points) == rectangleWidth*rectangleHeight {
 		return points
 	}
 	return make([]*Point, 0)
-
 }
 
 // GetTopRight returns the top-right point from point p
