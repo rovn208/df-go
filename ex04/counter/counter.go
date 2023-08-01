@@ -1,6 +1,7 @@
 package counter
 
 import (
+	"fmt"
 	"strconv"
 )
 
@@ -33,21 +34,26 @@ func (c *SimpleCounter) GetDifferentIntegers() int {
 				isFloat = true
 				continue
 			}
-			if _, ok := dict[num]; !ok && len(num) > 0 {
-				if !isFloat {
-					dict[num] = num
-					continue
+			if len(num) > 0 {
+				numInt, _ := strconv.Atoi(num)
+				num = strconv.Itoa(numInt)
+				if _, ok := dict[num]; !ok && len(num) > 0 {
+					if !isFloat {
+						dict[num] = num
+						num = ""
+						continue
+					}
+					isFloat = false
 				}
-				isFloat = false
 				num = ""
+				continue
 			}
-			num = ""
-			continue
-
 		} else {
 			num += char
 		}
+
 	}
+	fmt.Println(dict)
 
 	return len(dict)
 }

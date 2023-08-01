@@ -13,6 +13,7 @@ func TestGetDifferentIntegers(t *testing.T) {
 	}{
 		{"empty string", "", 0},
 		{"happy case", "a123bc34d8ef34", 3},
+		{"happy case", "A1b01c001", 1},
 		{"word with float number", "a123.311bc34d8ef34", 2},
 		{"word with special characters", "a123.311bEc34d語8ef34", 2},
 	}
