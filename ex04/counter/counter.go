@@ -1,7 +1,6 @@
 package counter
 
 import (
-	"fmt"
 	"strconv"
 )
 
@@ -53,7 +52,5 @@ func (c *SimpleCounter) GetDifferentIntegers() int {
 		}
 
 	}
-	fmt.Println(dict)
-
 	return len(dict)
 }
