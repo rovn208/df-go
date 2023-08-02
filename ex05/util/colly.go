@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// GetAnimeURL returns the anime url from a hyperlink element
 func GetAnimeURL(element *colly.HTMLElement) string {
 	href := element.ChildAttr("a", "href")
 
