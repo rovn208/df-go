@@ -1,4 +1,4 @@
-package main
+package scraper
 
 type Anime struct {
 	Title   string
