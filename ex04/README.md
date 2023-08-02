@@ -1,6 +1,6 @@
 # Assignment for Day 4
 
-## Rectangle counter
+## Different integers in a String counter
 - Goal: Count the number of different integers in a String.
 - Inputs: A string word consists of digits and lowercase English
   letters, 2 integers are considered different if their decimal
