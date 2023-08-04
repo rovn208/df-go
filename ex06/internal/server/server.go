@@ -6,8 +6,12 @@ import (
 
 func New() *gin.Engine {
 	router := gin.Default()
-	// Product management - Auth BasicAuth/JWT
+	router.Use(gin.Logger())
+	router.Use(gin.Recovery())
 
-	// Shopping Cart - Without Auth
+	v1 := router.Group("/v1")
+	addCartRoutes(v1)
+	addProductRoutes(v1)
+
 	return router
 }
