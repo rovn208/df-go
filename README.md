@@ -16,6 +16,7 @@ Assignment: [Count the number of different integers in a String](ex04)
 Assignment: [Simple web scraper](ex05)
 
 ## Day 6: Web Development with Go
+Assignment: [Simple E-commerce](ex06)
 
 ## Day 7: Database Access and ORM
 
