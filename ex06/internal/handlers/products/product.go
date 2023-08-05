@@ -2,21 +2,69 @@ package products
 
 import (
 	"github.com/gin-gonic/gin"
-	"net/http"
+	"github.com/rovn208/df-go/ex06/internal/constants"
+	"github.com/rovn208/df-go/ex06/internal/db"
+	"github.com/rovn208/df-go/ex06/internal/models/products"
+	"github.com/rovn208/df-go/ex06/internal/util"
 )
 
 func AddNewProduct(c *gin.Context) {
-	c.JSON(http.StatusOK, "Create a new product")
+	var p products.Product
+	if err := c.ShouldBindJSON(&p); err != nil {
+		util.BindJSONBadRequest(c, err)
+		return
+	}
+	if err := db.MockDB.AddNewProduct(p); err != nil {
+		util.BindJSONBadRequest(c, err)
+		return
+	}
+
+	util.BindSuccessRequest(c, "Product created successfully")
 }
 
 func GetProducts(c *gin.Context) {
-	c.JSON(http.StatusOK, "List of all productRoutes")
+	util.BindSuccessRequest(c, db.MockDB.GetProducts())
 }
 
 func UpdateProduct(c *gin.Context) {
-	c.JSON(http.StatusOK, "Update product details")
+	var p products.Product
+	var productUri products.ProductUri
+
+	if err := c.ShouldBindUri(&productUri); err != nil {
+		util.BindJSONBadRequest(c, err)
+		return
+	}
+
+	if err := c.ShouldBindJSON(&p); err != nil {
+		util.BindJSONBadRequest(c, err)
+		return
+	}
+
+	if p.ID != productUri.ProductId {
+		util.BindJSONBadRequest(c, constants.InvalidProductIdError)
+		return
+	}
+
+	if err := db.MockDB.UpdateProduct(p); err != nil {
+		util.BindJSONBadRequest(c, err)
+		return
+	}
+
+	util.BindSuccessRequest(c, p)
 }
 
 func DeleteProduct(c *gin.Context) {
-	c.JSON(http.StatusOK, "Delete a product by its ID")
+	var productUri products.ProductUri
+
+	if err := c.ShouldBindUri(&productUri); err != nil {
+		util.BindJSONBadRequest(c, err)
+		return
+	}
+
+	if err := db.MockDB.DeleteProduct(productUri.ProductId); err != nil {
+		util.BindJSONBadRequest(c, err)
+		return
+	}
+
+	util.BindSuccessRequest(c, "product deleted successfully")
 }

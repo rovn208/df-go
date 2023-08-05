@@ -20,6 +20,6 @@ func addProductRoutes(rg *gin.RouterGroup) {
 
 	productRoutes.POST("/", products.AddNewProduct)
 	productRoutes.GET("/", products.GetProducts)
-	productRoutes.PUT("/:productID", products.UpdateProduct)
-	productRoutes.DELETE("/:productID", products.DeleteProduct)
+	productRoutes.PUT("/:product_id", products.UpdateProduct)
+	productRoutes.DELETE("/:product_id", products.DeleteProduct)
 }

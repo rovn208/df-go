@@ -1,7 +1,10 @@
 package carts
 
-import "github.com/rovn208/df-go/ex06/internal/models/products"
-
 type Cart struct {
-	Products []products.Product `json:"products"`
+	ProductCarts []ProductCart `json:"items"`
+}
+
+type ProductCart struct {
+	ProductId string `json:"product_id" binding:"required"`
+	Quantity  int    `json:"quantity" binding:"required,min=1"`
 }

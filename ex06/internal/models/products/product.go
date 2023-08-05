@@ -3,5 +3,9 @@ package products
 type Product struct {
 	ID          string  `json:"id" binding:"required"`
 	Description string  `json:"description"`
-	Price       float32 `json:"price" binding:"required"`
+	Price       float64 `json:"price" binding:"required,min=1"`
+}
+
+type ProductUri struct {
+	ProductId string `uri:"product_id"`
 }
