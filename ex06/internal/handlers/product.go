@@ -19,7 +19,7 @@ func AddNewProduct(c *gin.Context) {
 		return
 	}
 
-	util.BindSuccessRequest(c, "Product created successfully")
+	util.BindSuccessMessageRequest(c, "Product created successfully")
 }
 
 func GetProducts(c *gin.Context) {
@@ -66,5 +66,5 @@ func DeleteProduct(c *gin.Context) {
 		return
 	}
 
-	util.BindSuccessRequest(c, "product deleted successfully")
+	util.BindSuccessMessageRequest(c, "product deleted successfully")
 }

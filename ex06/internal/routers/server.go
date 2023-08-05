@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// SetupRoutes - setup routes for server
 func SetupRoutes() *gin.Engine {
 	router := gin.Default()
 	router.Use(gin.Logger())

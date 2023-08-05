@@ -7,5 +7,5 @@ type Product struct {
 }
 
 type ProductUri struct {
-	ProductId string `uri:"product_id"`
+	ProductId string `uri:"product_id" binding:"required"`
 }

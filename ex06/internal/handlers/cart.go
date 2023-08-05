@@ -19,7 +19,7 @@ func AddProduct(c *gin.Context) {
 		util.BindJSONBadRequest(c, err)
 		return
 	}
-	util.BindSuccessRequest(c, "Added a product to cart successfully")
+	util.BindSuccessMessageRequest(c, "Added a product to cart successfully")
 }
 
 func Checkout(c *gin.Context) {
@@ -45,5 +45,5 @@ func RemoveItem(c *gin.Context) {
 		return
 	}
 
-	util.BindSuccessRequest(c, "remove item from carts")
+	util.BindSuccessMessageRequest(c, "remove item from carts")
 }

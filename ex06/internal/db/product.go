@@ -32,7 +32,11 @@ func (db *DB) UpdateProduct(product products.Product) error {
 func (db *DB) DeleteProduct(productId string) error {
 	for idx, p := range db.products {
 		if p.ID == productId {
-			db.products = append(db.products[:idx], db.products[idx+1:]...)
+			productList, err := util.RemoveProductAt(db.products, idx)
+			if err != nil {
+				return err
+			}
+			db.products = productList
 			return nil
 		}
 	}
