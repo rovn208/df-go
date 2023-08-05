@@ -9,3 +9,7 @@ type Product struct {
 type ProductUri struct {
 	ProductId string `uri:"product_id" binding:"required"`
 }
+
+type ProductIdJson struct {
+	ProductId string `json:"product_id" binding:"required"`
+}

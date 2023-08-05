@@ -33,14 +33,14 @@ func Checkout(c *gin.Context) {
 }
 
 func RemoveItem(c *gin.Context) {
-	var productUri products.ProductUri
+	var productIdJson products.ProductIdJson
 
-	if err := c.ShouldBindJSON(&productUri); err != nil {
+	if err := c.ShouldBindJSON(&productIdJson); err != nil {
 		util.BindJSONBadRequest(c, err)
 		return
 	}
 
-	if err := db.MockDB.RemoveItem(productUri.ProductId); err != nil {
+	if err := db.MockDB.RemoveItem(productIdJson.ProductId); err != nil {
 		util.BindJSONBadRequest(c, err)
 		return
 	}
