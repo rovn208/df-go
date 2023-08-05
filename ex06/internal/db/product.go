@@ -26,7 +26,7 @@ func (db *DB) UpdateProduct(product products.Product) error {
 			return nil
 		}
 	}
-	return nil
+	return constants.InvalidProductIdError
 }
 
 func (db *DB) DeleteProduct(productId string) error {

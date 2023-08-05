@@ -12,9 +12,9 @@ func (db *DB) AddProduct(pc carts.ProductCart) error {
 		return constants.InvalidProductIdError
 	}
 
-	for _, productCart := range db.cart.ProductCarts {
+	for idx, productCart := range db.cart.ProductCarts {
 		if productCart.ProductId == pc.ProductId {
-			productCart.Quantity += pc.Quantity
+			db.cart.ProductCarts[idx].Quantity += pc.Quantity
 			return nil
 		}
 	}
