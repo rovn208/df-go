@@ -13,7 +13,7 @@ func BindJSONBadRequest(c *gin.Context, err error) {
 }
 
 func BindSuccessRequest(c *gin.Context, msg any) {
-	c.JSON(http.StatusOK, msg)
+	c.JSON(http.StatusOK, gin.H{"message": msg})
 
 }
 

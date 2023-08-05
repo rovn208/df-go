@@ -1,4 +1,4 @@
-package carts
+package handlers
 
 import (
 	"github.com/gin-gonic/gin"

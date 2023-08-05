@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"github.com/rovn208/df-go/ex06/internal/server"
+	"github.com/rovn208/df-go/ex06/internal/routers"
 	"log"
 	"net/http"
 	"os"
@@ -12,13 +12,11 @@ import (
 )
 
 func main() {
-	// Init config
-	// Init logger
+	router := routers.SetupRoutes()
 
-	// Start server with gracefully shutdown
 	srv := &http.Server{
 		Addr:    ":8080",
-		Handler: server.New(),
+		Handler: router,
 	}
 	go func() {
 		if err := srv.ListenAndServe(); err != nil {
