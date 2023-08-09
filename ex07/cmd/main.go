@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"github.com/rovn208/df-go/ex07/internal/repo"
 	"github.com/rovn208/df-go/ex07/internal/routers"
 	"log"
 	"net/http"
@@ -12,8 +13,12 @@ import (
 )
 
 func main() {
-	router := routers.SetupRoutes()
+	dsn := "postgres://postgres:postgres@localhost:5432/ex07?sslmode=disable"
+	if err := repo.InitializeDB(dsn); err != nil {
+		log.Fatal(err)
+	}
 
+	router := routers.SetupRoutes()
 	srv := &http.Server{
 		Addr:    ":8080",
 		Handler: router,
