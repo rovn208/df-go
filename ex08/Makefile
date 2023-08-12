@@ -1,4 +1,7 @@
 run:
 	go run cmd/main.go
 
-.PHONY: run
+docker-build:
+	docker build -t ex08:latest .
+
+.PHONY: run, docker-build
