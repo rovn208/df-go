@@ -1,0 +1,11 @@
+services:
+  db:
+    image: postgres:12
+    restart: always
+    container_name: postgres_local
+    environment:
+      - POSTGRES_DB=ex08
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
