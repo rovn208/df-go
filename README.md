@@ -8,6 +8,7 @@ Assignment: [Sort elements command-line tool (CLI)](ex02)
 
 ## Day 3: Data Structures and Pointers
 Assignment: [Rectangle counter](ex03)
+
 Assignment: [Count the number of different integers in a String](ex04)
 
 ## Day 4: Error Handling and Testing
@@ -19,5 +20,7 @@ Assignment: [Simple web scraper](ex05)
 Assignment: [Simple E-commerce](ex06)
 
 ## Day 7: Database Access and ORM
+Assignment: [Simple E-commerce with actual database](ex07)
 
 ## Day 8: Advanced Topics and Final Project
+Assignment: [Deploy Simple E-commerce application with real database to fly.io](ex08)
