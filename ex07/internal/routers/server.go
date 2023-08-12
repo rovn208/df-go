@@ -11,7 +11,7 @@ func SetupRoutes() *gin.Engine {
 	router.Use(gin.Recovery())
 
 	v1 := router.Group("/api/v1")
-	//addCartRoutes(v1)
+	addCartRoutes(v1)
 	addProductRoutes(v1)
 
 	return router

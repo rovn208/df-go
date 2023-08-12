@@ -6,5 +6,5 @@ import (
 
 type Base struct {
 	gorm.Model
-	ID string `json:"id" binding:"required" gorm:"primarykey"`
+	ID string `json:"id" gorm:"primarykey"`
 }

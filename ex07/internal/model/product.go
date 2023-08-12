@@ -2,9 +2,8 @@ package model
 
 type Product struct {
 	Base
-	Description  string        `json:"description"`
-	Price        float64       `json:"price" binding:"required,min=1"`
-	OrderDetails []OrderDetail `gorm:"foreignKey:ProductID"`
+	Description string  `json:"description"`
+	Price       float64 `json:"price" binding:"required,min=1"`
 }
 
 type ProductUri struct {

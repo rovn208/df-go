@@ -2,7 +2,12 @@ module github.com/rovn208/df-go/ex07
 
 go 1.20
 
-require github.com/gin-gonic/gin v1.9.1
+require (
+	github.com/gin-gonic/gin v1.9.1
+	github.com/google/uuid v1.3.0
+	gorm.io/driver/postgres v1.5.2
+	gorm.io/gorm v1.25.2
+)
 
 require (
 	github.com/bytedance/sonic v1.10.0-rc3 // indirect
@@ -35,8 +40,5 @@ require (
 	golang.org/x/sys v0.11.0 // indirect
 	golang.org/x/text v0.12.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
-	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	gorm.io/driver/postgres v1.5.2 // indirect
-	gorm.io/gorm v1.25.2 // indirect
 )

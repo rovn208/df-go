@@ -3,6 +3,7 @@ package repo
 import (
 	"github.com/rovn208/df-go/ex07/internal/constant"
 	"github.com/rovn208/df-go/ex07/internal/model"
+	"time"
 )
 
 func AddNewProduct(product model.Product) error {
@@ -20,11 +21,14 @@ func GetProducts() ([]model.Product, error) {
 }
 
 func UpdateProduct(product model.Product) error {
-	if DB.First(&product).Error != nil {
+	p := &model.Product{}
+	if DB.First(&p, product.ID).Error != nil {
 		return constant.InvalidProductIdError
 	}
-	DB.Save(&product)
-	return nil
+	p.Price = product.Price
+	p.Description = product.Description
+	p.UpdatedAt = time.Now()
+	return DB.Save(&p).Error
 }
 
 func DeleteProduct(productId string) error {
