@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"fmt"
+	"github.com/rovn208/df-go/ex08/internal/config"
 	"github.com/rovn208/df-go/ex08/internal/repo"
 	"github.com/rovn208/df-go/ex08/internal/routers"
 	"log"
@@ -13,18 +15,21 @@ import (
 )
 
 func main() {
-	dsn := "postgres://postgres:postgres@localhost:5432/ex08?sslmode=disable"
-	if err := repo.InitializeDB(dsn); err != nil {
+	c, err := config.LoadConfig()
+	if err != nil {
+		log.Fatal(err)
+	}
+	if err = repo.InitializeDB(c.DB_URL); err != nil {
 		log.Fatal(err)
 	}
 
 	router := routers.SetupRoutes()
 	srv := &http.Server{
-		Addr:    ":8080",
+		Addr:    fmt.Sprintf(":%s", c.Port),
 		Handler: router,
 	}
 	go func() {
-		if err := srv.ListenAndServe(); err != nil {
+		if err = srv.ListenAndServe(); err != nil {
 			if err == http.ErrServerClosed {
 				log.Println("Server closed under request")
 			} else {
