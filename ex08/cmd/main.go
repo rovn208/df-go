@@ -15,11 +15,11 @@ import (
 )
 
 func main() {
-	c, err := config.LoadConfig()
+	c, err := config.LoadEnv()
 	if err != nil {
 		log.Fatal(err)
 	}
-	if err = repo.InitializeDB(c.DB_URL); err != nil {
+	if err = repo.InitializeDB(c.DBUrl); err != nil {
 		log.Fatal(err)
 	}
 
